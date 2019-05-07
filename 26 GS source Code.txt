@@ -1,0 +1,52 @@
+function onOpen(){
+     SpreadsheetApp.getUi().createMenu('Adv')
+       .addItem('PopUp 1', 'myFunction1')
+       .addSeparator()
+       .addItem('PopUp 2', 'myFunction2')
+       .addToUi();
+}
+
+function doGet(e){
+   var ss = SpreadsheetApp.openById('1RJu_-kLrKiiYrFarHVqV5mpeZhmF6M-98LfMq5ouvhs');
+   var sheet = ss.getSheetByName('people');
+   var range = sheet.getDataRange();
+   var values = range.getValues();
+   var holderArray = [];
+   var HTMLTemp = HtmlService.createTemplateFromFile('index');
+   for(x=1;x<values.length;x++){
+     holderArray.push({
+       "first" : values[x][0],
+       "last" : values[x][1],
+       "email" : values[x][2],
+       "approved" : values[x][3],
+       "age" : values[x][4],
+     });
+   }
+  HTMLTemp.data = holderArray;
+  var html = HTMLTemp.evaluate().setSandboxMode(HtmlService.SandboxMode.IFRAME);
+  return html;
+}
+
+function myFunction1() {
+   var ss = SpreadsheetApp.openById('1RJu_-kLrKiiYrFarHVqV5mpeZhmF6M-98LfMq5ouvhs');
+   var sheet = ss.getSheetByName('people');
+   var range = sheet.getDataRange();
+   var values = range.getValues();
+   var holderArray = [];
+   var HTMLTemp = HtmlService.createTemplateFromFile('index');
+   for(x=1;x<values.length;x++){
+     holderArray.push({
+       "first" : values[x][0],
+       "last" : values[x][1],
+       "email" : values[x][2],
+       "approved" : values[x][3],
+       "age" : values[x][4],
+     });
+   }
+  HTMLTemp.data = holderArray;
+  var html = HTMLTemp.evaluate().setWidth(600).setHeight(400);
+  SpreadsheetApp.getUi().showModalDialog(html, 'New Title');
+}
+function myFunction2() {
+  
+}

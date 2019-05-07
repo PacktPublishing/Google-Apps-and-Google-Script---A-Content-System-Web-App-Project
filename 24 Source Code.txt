@@ -1,0 +1,88 @@
+Google Script
+
+function onOpen(){
+     SpreadsheetApp.getUi().createMenu('Adv')
+       .addItem('PopUp 1', 'myFunction1')
+       .addSeparator()
+       .addItem('PopUp 2', 'myFunction2')
+       .addToUi();
+}
+
+function myFunction1() {
+   var ss = SpreadsheetApp.getActiveSpreadsheet();
+   var sheet = ss.getSheets()[0];
+   var range = sheet.getDataRange();
+   var values = range.getValues();
+   var holderArray = [];
+   var HTMLTemp = HtmlService.createTemplateFromFile('index');
+   for(x=1;x<values.length;x++){
+     holderArray.push({
+       "first" : values[x][0],
+       "last" : values[x][1],
+       "email" : values[x][2],
+       "approved" : values[x][3],
+       "age" : values[x][4],
+     });
+   }
+   //var html = HtmlService.createHtmlOutputFromFile('index');
+  
+  HTMLTemp.data = holderArray;
+  var html = HTMLTemp.evaluate().setWidth(600).setHeight(400)
+  SpreadsheetApp.getUi().showModalDialog(html, 'New Title');
+
+}
+function myFunction2() {
+  
+}
+
+
+
+Index.html
+
+<script>
+  var datags = <?!= JSON.stringify(data) ?>;
+</script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous"> </head>
+
+<body>
+    <div>
+        <table id="myTable" class="table table-striped">
+            <tr>
+                <th>First</th>
+                <th>Last</th>
+                <th>Email</th>
+                <th>Approved</th>
+                <th>Age</th>
+            </tr>
+        </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script>
+        $(function () {
+            console.log(datags);
+            jQuery.each(datags, function () {
+                console.log(this);
+                $('#myTable tr:last').after('<tr><td>' + this.first + '</td><td>' + this.last + '</td><td>' + this.email + '</td><td>' + this.approved + '</td><td>' + this.age + '</td></tr>');
+            })
+        });
+        /*
+            $.getJSON('https://spreadsheets.google.com/feeds/list/1RJu_-kLrKiiYrFarHVqV5mpeZhmF6M-98LfMq5ouvhs/od6/public/values?alt=json', function (data) {
+                var d = data.feed.entry;
+                jQuery.each(d, function () {
+                    $('#myTable tr:last').after('<tr><td>' + this['gsx$first']['$t'] + '</td><td>' + this['gsx$last']['$t'] + '</td><td>' + this['gsx$email']['$t'] + '</td><td>' + this['gsx$approved']['$t'] + '</td><td>' + this['gsx$age']['$t'] + '</td></tr>');
+                })
+                console.log(d);
+            });
+          */
+    </script>
+</body>
+
+</html>
+

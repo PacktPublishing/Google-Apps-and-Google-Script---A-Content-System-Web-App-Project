@@ -1,0 +1,61 @@
+function myFunction() {
+  var myDoc = DocumentApp.create('My Test Doc 4');
+  var body = myDoc.getBody();
+  body.appendParagraph("Adding new content to the document");
+}
+function myFunction1() {
+  var myDoc = DocumentApp.openById('1ecB4hbtm5-MC59cTap2EZ46eEPRsN8WHpajjBWd4UIU');
+  var body = myDoc.getBody();
+  
+  var curDate = new Date();
+  body.appendParagraph("New content added !!!!" + curDate.toLocaleString());
+}
+function myFunction2(){
+  var myDoc = DocumentApp.openById('1ecB4hbtm5-MC59cTap2EZ46eEPRsN8WHpajjBWd4UIU');
+  var body = myDoc.getBody();
+  var holder = "NEW OUTPUT";
+  var style = {};
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Calibri';
+  style[DocumentApp.Attribute.BOLD] = true;  
+  style[DocumentApp.Attribute.FONT_SIZE] = 24;
+  style[DocumentApp.Attribute.BACKGROUND_COLOR] = '#FF0000';
+  style[DocumentApp.Attribute.FOREGROUND_COLOR]= '#FFFFFF';
+  for(x=0;x<body.getNumChildren();x++){
+    holder += x + '. ' + body.getChild(x).getText() + '\n' ;
+  }
+  var newAtt = body.appendParagraph(holder).editAsText(); 
+  newAtt.setAttributes(style);
+}
+
+function myFunction3(){
+  var myDoc = DocumentApp.openById('1ecB4hbtm5-MC59cTap2EZ46eEPRsN8WHpajjBWd4UIU');
+  var body = myDoc.getBody();
+  var holder = "NEW OUTPUT\n";
+  var style = {};
+  style[DocumentApp.Attribute.FONT_FAMILY] = 'Calibri';
+  style[DocumentApp.Attribute.BOLD] = true;  
+  style[DocumentApp.Attribute.FONT_SIZE] = 12;
+  style[DocumentApp.Attribute.FOREGROUND_COLOR]= '#FFFFFF';
+  for(x=0;x<body.getNumChildren();x++){
+    var english = body.getChild(x).getText();
+    if(english.length >0 ){
+    var spanish = LanguageApp.translate(english, 'en', 'es');
+    holder +=  english + ' = ' +  spanish + '\n';
+    }
+  }
+  var newAtt = body.appendParagraph(holder).editAsText(); 
+  newAtt.setAttributes(style); 
+  
+}
+
+function myFunction4(){
+  var myDoc = DocumentApp.openById('1ecB4hbtm5-MC59cTap2EZ46eEPRsN8WHpajjBWd4UIU');
+  var body = myDoc.getBody();
+  var email = Session.getActiveUser().getEmail();
+  var docID = myDoc.getId();
+  var docName = myDoc.getName();
+  var docURL = myDoc.getUrl();
+  var emailBody = 'This is the new doc info from ' + docName + ' with ID ' + docID + '\n Click here > '+docURL; ;
+  GmailApp.sendEmail(email, 'New Doc info', emailBody);
+  
+}

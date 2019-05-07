@@ -1,0 +1,52 @@
+function onOpen() {
+    SpreadsheetApp.getUi().createMenu('Adv').addItem('Tester', 'popup').addToUi();
+}
+
+function popup() {
+    var htmlTemplate = HtmlService.createTemplateFromFile('index');
+    var ss = SpreadsheetApp.openById('1293awJdOMknL1XWqqhHBF3rB8ShlanI3h8Y05-LvgBM');
+    var sheets = ss.getSheets();
+    var holderArray = [];
+    for (var x = 0; x < sheets.length; x++) {
+        var sheetname = sheets[x].getName();
+        if (sheetname != 'Access' && sheetname != 'Home') {
+            holderArray.push(sheetname);
+        }
+    }
+    htmlTemplate.data = {
+        content: holderArray
+        , home: findDataHome()
+    }
+    var html = htmlTemplate.evaluate().setWidth(500).setHeight(300);
+    SpreadsheetApp.getUi().showModalDialog(html, 'My Portal')
+}
+
+function eOutput(data) {
+    var ss = SpreadsheetApp.openById('1293awJdOMknL1XWqqhHBF3rB8ShlanI3h8Y05-LvgBM');
+    var sheetname = data.project;
+    var message = '';
+    var success = false;
+    var dataout = {};
+    var sheet = ss.getSheetByName(sheetname);
+    if (sheet == null) {
+        message = 'Sheet not found';
+    }
+    else {
+        message = 'Sheet found';
+        success = true;
+        dataout = sheet.getRange(1, 1, sheet.getLastRow(), 3).getValues();
+    }
+    var response = {
+        success: success
+        , message: message
+        , data: dataout
+    }
+    return response;
+}
+
+function findDataHome() {
+    var ss = SpreadsheetApp.openById('1293awJdOMknL1XWqqhHBF3rB8ShlanI3h8Y05-LvgBM');
+    var sheet = ss.getSheetByName('Home');
+    var datahome = sheet.getRange(1, 1, sheet.getLastRow(), 2).getValues();
+    return datahome;
+}

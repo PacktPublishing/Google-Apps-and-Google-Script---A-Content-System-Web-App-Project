@@ -1,0 +1,19 @@
+Create a Google Account
+
+https://accounts.google.com/SignUp
+
+Connected Apps Script
+
+https://myaccount.google.com/permissions?pli=1
+
+Google Apps Script Reference Guide
+
+https://developers.google.com/apps-script/reference/document/
+
+Apps Script Main Page
+
+https://developers.google.com/apps-script/
+
+Create Apps Script
+
+https://www.google.com/script/start/

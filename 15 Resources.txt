@@ -1,0 +1,38 @@
+Bootstrap 4
+
+https://v4-alpha.getbootstrap.com/
+
+jQuery CDN
+
+https://developers.google.com/speed/libraries/
+
+OUTPUT Google Sheet as JSON
+
+https://spreadsheets.google.com/feeds/list/************/od6/public/values?alt=json
+
+replace the ****** with your sheet id
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<div>
+    <table id="myTable" class="table table-striped">
+        <tr>
+            <th>First</th>
+            <th>Last</th>
+            <th>Email</th>
+            <th>Approved</th>
+            <th>Age</th>
+        </tr>
+    </table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<script>
+    $.getJSON('https://spreadsheets.google.com/feeds/list/************/od6/public/values?alt=json', function (data) {
+        var d = data.feed.entry;
+        jQuery.each(d, function () {
+            $('#myTable tr:last').after('<tr><td>' + this['gsx$first']['$t'] + '</td><td>' + this['gsx$last']['$t'] + '</td><td>' + this['gsx$email']['$t'] + '</td><td>' + this['gsx$approved']['$t'] + '</td><td>' + this['gsx$age']['$t'] + '</td></tr>');
+        })
+        console.log(d);
+    });
+</script>

@@ -1,0 +1,49 @@
+Google Apps Google Script - Content System Web App Project
+
+Learn to Build a custom web application using Google Scripts connecting Google Apps together
+
+Learn how to build Web Apps with Google Script
+
+Increase the power of your favorite Google apps — like Calendar, Docs, Drive, Gmail, and Sheets.  Apps Script lets you do more with Google. All on a JavaScript platform in the cloud.
+
+If you know JavaScript you can jump right in and start creating web apps connecting all of your Google application together.   Automate your work you will be amazed at how easy it is to work with Apps Script.
+
+JavaScript is a prerequisite to this course!
+
+Course Lessons will demonstrate how to use Google Script
+
+Learn what Google script is and how to write code with it
+Create a Google Doc with one line of code 
+Update existing Google Docs 
+Setup up automation with Triggers 
+Copy content from your Google Doc 
+Change colors and text within your Google Doc 
+Link to other Google apps 
+Translate your Google Doc in One line of Code! 
+Send your Google Doc info as an email through Gmail
+Building a Webap
+
+Connecting your Google Sheet Data
+Accessing Sheet data via a JSON feed
+Connecting your Sheet data to a local application using AJAX
+How to add Bootstrap and jQuery into your Google App
+How to create popup modals and dynamic interaction
+Deploy your first web app
+Build a Custom Content System driven from Google Sheet data
+
+Add Alerts and interactive dialog
+Setup HTML page
+Add Bootstrap 4 and jQuery to your app
+Create a dynamic drop list from Google Sheets
+Generate a home page of content from Sheets
+Send data back to GS to callback
+Generate HTML output from Google Sheets data
+Provide Access control of content
+How to bug fix and tweak your application
+Get a web url for your application
+Check and authenticate users
+Output content from Google Sheet data
+Code review and output
+Taught by an instructor with over 18 years of web development experience.  I'm here to help you learn about Google Scripts and ready to answer any questions you might have.
+
+You will be amazed at what you can do with Google Scripts, join now to start creating your own applications today.

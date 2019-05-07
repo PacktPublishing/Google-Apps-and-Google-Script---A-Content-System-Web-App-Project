@@ -1,0 +1,11 @@
+Bootstrap 
+
+https://v4-alpha.getbootstrap.com/
+
+jQuery CDN
+
+https://developers.google.com/speed/libraries/
+
+Placeholder images
+
+https://placeholder.com/
